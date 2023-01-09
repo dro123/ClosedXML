@@ -17,7 +17,9 @@ namespace ClosedXML.Excel.CalcEngine
     {
         private readonly CultureInfo _culture;
         private ExpressionCache _cache;               // cache with parsed expressions
+#if WITHXLPARSER
         private readonly FormulaParser _parser;
+#endif
         private readonly FunctionRegistry _funcRegistry;      // table with constants and functions (pi, sin, etc)
         private readonly CalculationVisitor _visitor;
 
@@ -26,7 +28,9 @@ namespace ClosedXML.Excel.CalcEngine
             _culture = culture;
             _funcRegistry = GetFunctionTable();
             _cache = new ExpressionCache(this);
+#if WITHXLPARSER
             _parser = new FormulaParser(_funcRegistry);
+#endif
             _visitor = new CalculationVisitor(_funcRegistry);
         }
 
@@ -37,8 +41,12 @@ namespace ClosedXML.Excel.CalcEngine
         /// <returns>An <see cref="Expression"/> object that can be evaluated.</returns>
         public Formula Parse(string expression)
         {
+#if WITHXLPARSER
             var cst = _parser.ParseCst(expression);
             return _parser.ConvertToAst(cst);
+#else
+            return new Formula(expression, null, FormulaFlags.None);
+#endif
         }
 
         /// <summary>
@@ -62,7 +70,7 @@ namespace ClosedXML.Excel.CalcEngine
                 : Parse(expression);
 
             var ctx = new CalcContext(this, _culture, wb, ws, address);
-            var result = x.AstRoot.Accept(ctx, _visitor);
+            var result = x.AstRoot?.Accept(ctx, _visitor) ?? AnyValue.Blank;
             if (ctx.UseImplicitIntersection)
             {
                 result = result.Match(
@@ -87,7 +95,7 @@ namespace ClosedXML.Excel.CalcEngine
 
             var ctx = new CalcContext(this, _culture, wb, ws, address);
             var calculatingVisitor = new CalculationVisitor(_funcRegistry);
-            return x.AstRoot.Accept(ctx, calculatingVisitor);
+            return x.AstRoot?.Accept(ctx, calculatingVisitor) ?? AnyValue.Blank;
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using ClosedXML.Excel.CalcEngine.Exceptions;
+﻿#if WITHXLPARSER
+using ClosedXML.Excel.CalcEngine.Exceptions;
 using Irony.Ast;
 using Irony.Parsing;
 using System;
@@ -667,3 +668,4 @@ namespace ClosedXML.Excel.CalcEngine
         }
     }
 }
+#endif

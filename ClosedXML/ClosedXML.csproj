@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <PackageId>ClosedXML.NoFormulaEvaluation</PackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
@@ -34,6 +35,6 @@
     <!-- Pre-6.0.0 System.IO.Packaging has a race condition https://github.com/dotnet/runtime/issues/43012 -->
     <PackageReference Include="System.IO.Packaging" Version="6.0.0" />
     <PackageReference Include="System.Memory" Version="4.5.4" />
-    <PackageReference Include="XLParser" Version="1.5.2" />
+    <PackageReference Include="XLParser" Version="1.5.2" Condition="'$(WithXlParser)'=='true'" />
   </ItemGroup>
 </Project>
