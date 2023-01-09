@@ -1,4 +1,5 @@
-﻿using Irony.Parsing;
+﻿#if WITHXLPARSER
+using Irony.Parsing;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -791,3 +792,4 @@ namespace ClosedXML.Tests.Excel.CalcEngine
         }
     }
 }
+#endif

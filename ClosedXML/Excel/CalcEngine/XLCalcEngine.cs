@@ -56,14 +56,14 @@ namespace ClosedXML.Excel.CalcEngine
         {
             var formula = Parse(expression);
             var ctx = new PrecedentAreasContext(worksheet);
-            var rootValue = formula.AstRoot.Accept(ctx, FormulaRangesVisitor.Default);
+            var rootValue = formula.AstRoot?.Accept(ctx, FormulaRangesVisitor.Default);
             if (ctx.HasReferenceErrors/* || ctx.UsesNamedRanges */)
             {
                 precedentAreas = null;
                 return false;
             }
 
-            if (rootValue.TryPickT0(out var rootReference, out var _))
+            if (rootValue is not null && rootValue.Value.TryPickT0(out var rootReference, out var _))
                 ctx.AddReference(rootReference!);
 
             precedentAreas = ctx.FoundReferences
