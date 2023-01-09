@@ -6,11 +6,12 @@
 
   <PropertyGroup>
     <Version>0.100.3</Version>
+    <WithXlParser>false</WithXlParser>
   </PropertyGroup>
 
   <!-- Set common properties regarding assembly information and nuget packages -->
   <PropertyGroup>
-    <Product>ClosedXML</Product>
+    <Product>ClosedXML.NoFormulaEvaluation</Product>
 
     <Authors>Francois Botha, Jan Havlíček, Aleksei Pankratev, Manuel de Leon, Amir Ghezelbash</Authors>
     <Owners>Francois Botha, Jan Havlíček, Aleksei Pankratev</Owners>
@@ -18,12 +19,12 @@
 
     <Copyright>MIT</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/ClosedXML/ClosedXML</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/dro123/ClosedXML</PackageProjectUrl>
     <PackageIcon>nuget-logo.png</PackageIcon>
     <PackageTags>Excel OpenXml xlsx</PackageTags>
-    <Description>See release notes https://github.com/ClosedXML/ClosedXML/releases/tag/0.100.0. ClosedXML is a .NET library for reading, manipulating and writing Excel 2007+ (.xlsx, .xlsm) files. It aims to provide an intuitive and user-friendly interface to dealing with the underlying OpenXML API.</Description>
-    <PackageReleaseNotes>See https://github.com/ClosedXML/ClosedXML/releases/tag/$(productVersion)</PackageReleaseNotes>
-    <RepositoryUrl>https://github.com/ClosedXML/ClosedXML</RepositoryUrl>
+    <Description>See release notes https://github.com/ClosedXML/ClosedXML/releases/tag/$(Version) . ClosedXML is a .NET library for reading, manipulating and writing Excel 2007+ (.xlsx, .xlsm) files. Formulas are not evaluated. It aims to provide an intuitive and user-friendly interface to dealing with the underlying OpenXML API.</Description>
+    <PackageReleaseNotes>See https://github.com/ClosedXML/ClosedXML/tag/$(Version)</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/dro123/ClosedXML</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
 
     <!-- Sourcelink: https://github.com/dotnet/sourcelink/ -->
@@ -42,6 +43,10 @@
   <!-- Additional properties that might not be applicable to a local dev environment -->
   <PropertyGroup>
     <DefineConstants>$(AppVeyor)</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(WithXlParser)'=='true'">
+    <DefineConstants>WITHXLPARSER</DefineConstants>
   </PropertyGroup>
 
 </Project>
