@@ -7,6 +7,7 @@
          emitted by netstandard2.1 target -->
     <Nullable Condition="'$(TargetFramework)' == 'netstandard2.0'">annotations</Nullable>
     <Nullable Condition="'$(TargetFramework)' == 'netstandard2.1'">enable</Nullable>
+    <PackageId>ClosedXML.NoFormulaEvaluation</PackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
@@ -32,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DocumentFormat.OpenXml" Version="2.16.0" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.20.0" />
     <PackageReference Include="ExcelNumberFormat" Version="1.1.0" />
     <PackageReference Include="Fody" Version="6.3.0">
       <PrivateAssets>all</PrivateAssets>
@@ -43,7 +44,7 @@
     <PackageReference Include="SixLabors.Fonts" Version="1.0.0-beta19" />
     <!-- Pre-6.0.0 System.IO.Packaging has a race condition https://github.com/dotnet/runtime/issues/43012 -->
     <PackageReference Include="System.IO.Packaging" Version="6.0.0" />
-    <PackageReference Include="XLParser" Version="1.5.2" />
+    <PackageReference Include="XLParser" Version="1.5.2" Condition="'$(WithXlParser)'=='true'" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">

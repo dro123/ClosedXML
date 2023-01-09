@@ -1,5 +1,6 @@
 #nullable disable
 
+#if WITHXLPARSER
 using Irony.Ast;
 using Irony.Parsing;
 using System;
@@ -677,3 +678,4 @@ namespace ClosedXML.Excel.CalcEngine
         }
     }
 }
+#endif

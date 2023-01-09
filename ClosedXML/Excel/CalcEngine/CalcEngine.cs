@@ -17,7 +17,9 @@ namespace ClosedXML.Excel.CalcEngine
     {
         private readonly CultureInfo _culture;
         private readonly ExpressionCache _cache;               // cache with parsed expressions
+#if WITHXLPARSER
         private readonly FormulaParser _parser;
+#endif
         private readonly CalculationVisitor _visitor;
 
         public CalcEngine(CultureInfo culture)
@@ -25,7 +27,9 @@ namespace ClosedXML.Excel.CalcEngine
             _culture = culture;
             _cache = new ExpressionCache(this);
             var funcRegistry = GetFunctionTable();
+#if WITHXLPARSER
             _parser = new FormulaParser(funcRegistry);
+#endif
             _visitor = new CalculationVisitor(funcRegistry);
         }
 
@@ -36,8 +40,12 @@ namespace ClosedXML.Excel.CalcEngine
         /// <returns>An <see cref="Expression"/> object that can be evaluated.</returns>
         public Formula Parse(string expression)
         {
+#if WITHXLPARSER
             var cst = _parser.ParseCst(expression);
             return _parser.ConvertToAst(cst);
+#else
+            return new Formula(expression, null, FormulaFlags.None);
+#endif
         }
 
         /// <summary>
@@ -93,7 +101,7 @@ namespace ClosedXML.Excel.CalcEngine
         {
             var x = _cache[expression];
 
-            var result = x.AstRoot.Accept(ctx, _visitor);
+            var result = x.AstRoot?.Accept(ctx, _visitor) ?? AnyValue.Blank;
             return result;
         }
 

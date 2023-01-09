@@ -6,9 +6,9 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <description>ClosedXML is a .NET library for reading, manipulating and writing Excel 2007+ (.xlsx, .xlsm) files. It aims to provide an intuitive and user-friendly interface to dealing with the underlying OpenXML API.</description>
-    <licenseUrl>https://github.com/ClosedXML/ClosedXML/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/ClosedXML/ClosedXML</projectUrl>
+    <description>ClosedXML is a .NET library for reading, manipulating and writing Excel 2007+ (.xlsx, .xlsm) files. Formulas are not evaluated. It aims to provide an intuitive and user-friendly interface to dealing with the underlying OpenXML API.</description>
+    <licenseUrl>https://github.com/dro123/ClosedXML/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/dro123/ClosedXML</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <copyright>@ClosedXML</copyright>
     <tags>ClosedXML</tags>
